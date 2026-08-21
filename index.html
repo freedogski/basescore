@@ -385,6 +385,10 @@ function loadBaseScore() {
   return localStorage.getItem("BaseScore") || 0;
 }
 
+if (!window.name) {
+  window.name = "basescoreWindow";
+}
+
 const THEME_STORAGE_KEY = "BaseScoreTheme";
 const SCORE_STORAGE_KEY = "BaseScoreStateV1";
 const APP_SESSION_HEARTBEAT_KEY = "BaseScoreAppSessionHeartbeatV1";
