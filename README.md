@@ -62,8 +62,8 @@ Live version: [https://freedogski.github.io/basescore/](https://freedogski.githu
 - Theme preference is saved in browser storage and reused on reload.
 - Shared theme key is used with the companion app so mode is retained when switching between Basescore and Reversebase on the same browser profile.
 - **Shared score state** (Base Score + Carving/Abs/Ext/Upper Body) is saved and reused across Basescore and Reversebase while actively toggling between apps.
-- **Fresh session reset:** if both app tabs have been closed/inactive long enough, the next open starts from default Base Score = **10.0**.
-- Footer app-switch links are configured to reuse named windows/tabs so toggling stays around a two-window workflow instead of opening unlimited tabs.
+- **Fresh session reset:** if the app has been closed/inactive long enough, the next open starts from default Base Score = **10.0**.
+- Footer app-switch link navigates within the same browser tab (no popup/second window), so toggling between Basescore and Reversebase is reliable on PC, Mac, Android, and iPad.
 
 ### Visual Features
 - Gradient animations for sliders and Base Score input.  
@@ -90,7 +90,7 @@ Live version: [https://freedogski.github.io/basescore/](https://freedogski.githu
 3. Or enter a Base Score manually; sliders will adjust automatically.  
 4. Use the up/down arrows to fine-tune values.  
 5. Use the top-right button to toggle Light/Dark mode.  
-6. Use the footer link to switch to Reversebase while keeping the same scoring session when both app tabs are active.  
+6. Use the footer link to switch to Reversebase, keeping the same scoring session in the same tab.  
 7. The gradient coloring helps visualize score ranges.
 
 ---
