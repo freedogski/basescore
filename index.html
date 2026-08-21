@@ -385,8 +385,6 @@ function loadBaseScore() {
   return localStorage.getItem("BaseScore") || 0;
 }
 
-window.name = "basescoreWindow";
-
 const THEME_STORAGE_KEY = "BaseScoreTheme";
 const SCORE_STORAGE_KEY = "BaseScoreStateV1";
 const APP_SESSION_HEARTBEAT_KEY = "BaseScoreAppSessionHeartbeatV1";
@@ -457,14 +455,13 @@ function shouldResetScoreOnOpen() {
 function initCompanionLink() {
   const link = document.getElementById("toReversebase");
   if (!link) return;
+  // Named-window reuse via window.open is unreliable on iPadOS Safari
+  // (it loses track of the browsing-context name after switching tabs),
+  // so navigate the current tab instead of opening a second window.
+  link.removeAttribute("target");
   link.addEventListener("click", (event) => {
     event.preventDefault();
-    const win = window.open(link.href, "reversebaseWindow");
-    if (win) {
-      try { win.focus(); } catch {}
-    } else {
-      window.location.href = link.href;
-    }
+    window.location.href = link.href;
   });
 }
 initCompanionLink();
