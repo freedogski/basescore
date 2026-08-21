@@ -370,7 +370,7 @@ input[type="range"]::-moz-range-thumb{
   </div>
 
   <div class="footer">
-    <a href="https://freedogski.github.io/reversebase/" target="reversebaseWindow">https://freedogski.github.io/reversebase/</a>
+    <a id="toReversebase" href="https://freedogski.github.io/reversebase/" target="reversebaseWindow">https://freedogski.github.io/reversebase/</a>
   </div>
   
 </div>
@@ -385,9 +385,7 @@ function loadBaseScore() {
   return localStorage.getItem("BaseScore") || 0;
 }
 
-if (!window.name) {
-  window.name = "basescoreWindow";
-}
+window.name = "basescoreWindow";
 
 const THEME_STORAGE_KEY = "BaseScoreTheme";
 const SCORE_STORAGE_KEY = "BaseScoreStateV1";
@@ -455,6 +453,21 @@ function shouldResetScoreOnOpen() {
   initAppSessionHeartbeat();
   return !active;
 }
+
+function initCompanionLink() {
+  const link = document.getElementById("toReversebase");
+  if (!link) return;
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const win = window.open(link.href, "reversebaseWindow");
+    if (win) {
+      try { win.focus(); } catch {}
+    } else {
+      window.location.href = link.href;
+    }
+  });
+}
+initCompanionLink();
 </script>
 
 <script>
