@@ -9,7 +9,40 @@
   --track-height:8px;
   --thumb-size:26px;
   --bg:#f5f7fb;
+  --card-bg:#ffffff;
+  --text:#0f172a;
+  --muted:#475569;
+  --value-bg:#f3f5f9;
+  --value-border:#e6e9f0;
+  --control-bg:#f3f5f9;
+  --control-border:#d9dee7;
+  --control-hover:#eaf1ff;
+  --control-active:#dce8ff;
+  --tick:#cbd5e1;
+  --thumb-bg:#334155;
+  --thumb-border:#ffffff;
+  --link:#1d4ed8;
+  --shadow:0 4px 20px rgba(0,0,0,0.05);
+  color-scheme:light;
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+}
+[data-theme="dark"]{
+  --bg:#0b1220;
+  --card-bg:#111827;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --value-bg:#1f2937;
+  --value-border:#334155;
+  --control-bg:#1f2937;
+  --control-border:#334155;
+  --control-hover:#263447;
+  --control-active:#314159;
+  --tick:#475569;
+  --thumb-bg:#cbd5e1;
+  --thumb-border:#0f172a;
+  --link:#93c5fd;
+  --shadow:0 8px 30px rgba(0,0,0,0.35);
+  color-scheme:dark;
 }
 body{
   margin:0;
@@ -17,27 +50,58 @@ body{
   justify-content:center;
   align-items:flex-start;
   background:var(--bg);
+  color:var(--text);
   padding:10px;
+}
+.card,
+.total,
+.total-range,
+label,
+.categories,
+.range-text,
+.value-box,
+.arrow-btn,
+.theme-toggle,
+.footer a,
+body{
+  transition:background-color 0.2s ease,color 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease;
 }
 .card{
   width:100%;
   max-width:700px;
-  background:white;
+  background:var(--card-bg);
   border-radius:10px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  box-shadow:var(--shadow);
   padding:16px;
   text-align:center;
 }
+.theme-toggle{
+  position:fixed;
+  top:10px;
+  right:10px;
+  z-index:1000;
+  min-width:110px;
+  min-height:40px;
+  border-radius:999px;
+  border:1px solid var(--control-border);
+  background:var(--control-bg);
+  color:var(--text);
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.theme-toggle:hover{background:var(--control-hover);}
+.theme-toggle:active{background:var(--control-active);}
 .total{
   font-size:22px;
   font-weight:800;
   margin-bottom:2px;
-  color:#000;
+  color:var(--text);
 }
 .total-range{
   font-size:13px;
   font-weight:700;
-  color:#000;
+  color:var(--text);
   height:18px;
   opacity:1;
   transition:opacity 0.3s ease;
@@ -61,12 +125,13 @@ body{
 label{
   font-size:15px;
   font-weight:700;
-  color:#000;
+  color:var(--text);
   grid-column:1 / span 3;
   text-align:left;
 }
 input[type="range"]{
   -webkit-appearance:none;
+  appearance:none;
   width:100%;
   height:var(--thumb-size);
   background:transparent;
@@ -90,8 +155,8 @@ input[type="range"]::-webkit-slider-thumb{
   height:var(--thumb-size);
   margin-top:calc((var(--track-height)-var(--thumb-size))/2);
   border-radius:50%;
-  background:#333;
-  border:3px solid white;
+  background:var(--thumb-bg);
+  border:3px solid var(--thumb-border);
   box-shadow:0 2px 6px rgba(0,0,0,0.25);
   transition:transform .08s ease;
 }
@@ -100,8 +165,8 @@ input[type="range"]::-moz-range-thumb{
   width:var(--thumb-size);
   height:var(--thumb-size);
   border-radius:50%;
-  background:#333;
-  border:3px solid white;
+  background:var(--thumb-bg);
+  border:3px solid var(--thumb-border);
   box-shadow:0 2px 6px rgba(0,0,0,0.25);
 }
 .tick-container{
@@ -114,14 +179,14 @@ input[type="range"]::-moz-range-thumb{
   top:0;
   width:2px;
   height:8px;
-  background:#ccc;
+  background:var(--tick);
   transform:translateX(-1px);
 }
 .categories{
   display:flex;
   justify-content:space-between;
   font-size:11px;
-  color:#000;
+  color:var(--text);
   font-weight:600;
   margin-top:3px;
 }
@@ -144,8 +209,8 @@ input[type="range"]::-moz-range-thumb{
 .value-box{
   font-weight:700;
   font-size:18px;
-  background:#f3f5f9;
-  border:1px solid #e6e9f0;
+  background:var(--value-bg);
+  border:1px solid var(--value-border);
   border-radius:6px;
   padding:4px 8px;
   min-width:60px;
@@ -155,7 +220,7 @@ input[type="range"]::-moz-range-thumb{
   font-size:11px;
   margin-top:2px;
   font-weight:700;
-  color:#000;
+  color:var(--text);
   height:14px;
 }
 @media (max-width:420px){
@@ -172,18 +237,19 @@ input[type="range"]::-moz-range-thumb{
   gap:4px;
 }
 .arrow-btn{
-  background:#f3f5f9;
-  border:1px solid #d9dee7;
+  background:var(--control-bg);
+  border:1px solid var(--control-border);
   border-radius:5px;
   font-size:16px;
   width:30px;
   height:30px;
   line-height:28px;
+  color:var(--text);
   cursor:pointer;
   user-select:none;
 }
-.arrow-btn:hover{background:#eaf1ff;}
-.arrow-btn:active{background:#dce8ff;}
+.arrow-btn:hover{background:var(--control-hover);}
+.arrow-btn:active{background:var(--control-active);}
 
 .footer{
   margin-top:20px;
@@ -191,13 +257,36 @@ input[type="range"]::-moz-range-thumb{
   text-align:center;
 }
 .footer a{
-  color:#0000ee;
+  color:var(--link);
   text-decoration:none;
+}
+@media (max-width:500px){
+  .theme-toggle{
+    min-width:96px;
+    min-height:36px;
+    font-size:13px;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .card,
+  .total,
+  .total-range,
+  label,
+  .categories,
+  .range-text,
+  .value-box,
+  .arrow-btn,
+  .theme-toggle,
+  .footer a,
+  body{
+    transition:none;
+  }
 }
 
 </style>
 </head>
 <body>
+<button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button>
 <div class="card">
   <div class="total">Base Score = <span id="total">10.0</span></div>
   <div class="total-range" id="totalRange"></div>
@@ -290,6 +379,33 @@ function saveBaseScore(value) {
 function loadBaseScore() {
   return localStorage.getItem("BaseScore") || 0;
 }
+
+const THEME_STORAGE_KEY = "BaseScoreTheme";
+function getSystemTheme() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+  const next = theme === "dark" ? "light" : "dark";
+  btn.textContent = next === "dark" ? "Dark mode" : "Light mode";
+  btn.setAttribute("aria-label", `Switch to ${next} mode`);
+}
+function initTheme() {
+  const saved = localStorage.getItem(THEME_STORAGE_KEY);
+  const theme = saved === "dark" || saved === "light" ? saved : getSystemTheme();
+  applyTheme(theme);
+  const btn = document.getElementById("themeToggle");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+  }
+}
+initTheme();
 </script>
 
 <script>

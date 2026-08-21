@@ -58,6 +58,9 @@ Live version: [https://freedogski.github.io/basescore/](https://freedogski.githu
 - Entering a Base Score updates all sliders.  
 - Responsive arrow controls for all sliders.  
 - Mobile-friendly layout: text wraps or shortens as needed.
+- Top-right **Light/Dark mode toggle** for quick theme switching.
+- Theme preference is saved in browser storage and reused on reload.
+- Shared theme key is used with the companion app so mode is retained when switching between Basescore and Reversebase on the same browser profile.
 
 ### Visual Features
 - Gradient animations for sliders and Base Score input.  
@@ -83,7 +86,8 @@ Live version: [https://freedogski.github.io/basescore/](https://freedogski.githu
 2. Observe the Base Score update in real time.  
 3. Or enter a Base Score manually; sliders will adjust automatically.  
 4. Use the up/down arrows to fine-tune values.  
-5. The gradient coloring helps visualize score ranges.
+5. Use the top-right button to toggle Light/Dark mode.  
+6. The gradient coloring helps visualize score ranges.
 
 ---
 
@@ -92,7 +96,7 @@ Live version: [https://freedogski.github.io/basescore/](https://freedogski.githu
 - Add **live gradient legend** for Base Score and sliders.  
 - Save and load score presets.  
 - Export scores as CSV for analysis.  
-- Optional dark mode theme.  
+- Additional theme variants beyond Light/Dark.  
 
 ---
 
