@@ -387,6 +387,9 @@ function loadBaseScore() {
 
 const THEME_STORAGE_KEY = "BaseScoreTheme";
 const SCORE_STORAGE_KEY = "BaseScoreStateV1";
+const APP_SESSION_HEARTBEAT_KEY = "BaseScoreAppSessionHeartbeatV1";
+const APP_SESSION_TTL_MS = 12000;
+const APP_SESSION_HEARTBEAT_MS = 4000;
 function getSystemTheme() {
   return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
@@ -424,6 +427,29 @@ function loadScoreState() {
   } catch {
     return null;
   }
+}
+
+function markAppSessionActive() {
+  localStorage.setItem(APP_SESSION_HEARTBEAT_KEY, String(Date.now() + APP_SESSION_TTL_MS));
+}
+
+function hasRecentAppSession() {
+  return Number(localStorage.getItem(APP_SESSION_HEARTBEAT_KEY) || 0) > Date.now();
+}
+
+function initAppSessionHeartbeat() {
+  markAppSessionActive();
+  setInterval(markAppSessionActive, APP_SESSION_HEARTBEAT_MS);
+  window.addEventListener("pageshow", markAppSessionActive);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") markAppSessionActive();
+  });
+}
+
+function shouldResetScoreOnOpen() {
+  const active = hasRecentAppSession();
+  initAppSessionHeartbeat();
+  return !active;
 }
 </script>
 
@@ -593,7 +619,13 @@ document.querySelectorAll('.tick-container').forEach(tc=>{
     tc.appendChild(tick);
   }
 });
-applyLoadedScoreState();
+if(shouldResetScoreOnOpen()){
+  sliders[0].el.value='5.0';
+  sliders[1].el.value='2.5';
+  sliders[2].el.value='2.5';
+}else{
+  applyLoadedScoreState();
+}
 update();
 })();
 </script>
